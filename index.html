@@ -3,176 +3,189 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="语安智库：面向多语种应急语言与国家安全研究的语料、学术与项目平台。">
-  <title>语安智库 · 国家安全语料与应急语言平台</title>
+  <meta name="description" content="语安智库：浏览、检索与下载国家安全 20 领域多语种语料，了解应急语言研究与应用。">
+  <meta name="theme-color" content="#030814">
+  <title>语安智库 · 国家安全多语种语料平台</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">跳到主要内容</a>
+  <a class="skip-link" href="#corpus">跳到语料检索</a>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="reading-progress" aria-hidden="true"><i></i></div>
+
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="语安智库首页">
-      <span class="brand-mark" aria-hidden="true">语</span>
-      <span><strong>语安智库</strong><small>LINGUASEC KNOWLEDGE HUB</small></span>
+    <a class="brand" href="#home" aria-label="语安智库首页">
+      <span class="brand-orbit" aria-hidden="true"><i></i><b>语</b></span>
+      <span><strong>语安智库</strong><small>LINGUASEC ATLAS</small></span>
     </a>
     <nav class="main-nav" aria-label="主导航">
-      <a class="active" href="#corpus">语料总览</a>
+      <a class="active" href="#corpus">语料库</a>
+      <a href="#downloads">数据下载</a>
       <a href="#guide">入门导览</a>
-      <a href="#research">学术地图</a>
-      <a href="#projects">项目成果</a>
+      <a href="#method">研究方法</a>
+      <a href="#academic">学术资源</a>
+      <a href="#project">项目成果</a>
     </nav>
-    <button class="menu-button" type="button" aria-expanded="false" aria-label="打开导航">目录</button>
+    <button class="menu-button" type="button" aria-expanded="false" aria-label="打开导航"><i></i><i></i></button>
   </header>
 
-  <main id="main">
-    <section class="hero" id="top">
-      <div class="hero-copy">
-        <p class="eyebrow"><span></span> 多语种语料 × 应急语言 × 国家安全</p>
-        <h1>从海量文本中，<br><em>读懂安全如何被表达。</em></h1>
-        <p class="lead">一个面向学习者、研究者与应急语言实践者的知识平台。从 20 个国家安全领域的中英文语料出发，连接语言风险标注、学术谱系与灾害应急应用。</p>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span></span> OPEN CORPUS · V3 · 2026</p>
+        <h1>在语言的星图中，<br><em>定位安全叙事。</em></h1>
+        <p class="lead">浏览、检索并下载 20 个国家安全领域的 2,854 条中英文候选标注语料，追溯每一条表达的来源、语境与风险标签。</p>
         <div class="hero-actions">
-          <a class="primary-button" href="#corpus">开始浏览语料 <span aria-hidden="true">↓</span></a>
-          <a class="text-link" href="#guide">我是初学者 <span aria-hidden="true">→</span></a>
+          <a class="button primary" href="#corpus">开始检索 <span>↘</span></a>
+          <a class="button ghost" href="downloads/国家安全20领域语料_V3_JSONL.zip" download>下载完整数据 <span>↓</span></a>
+        </div>
+        <div class="hero-metrics" aria-label="数据集概况">
+          <div><strong data-count="2854">0</strong><span>候选标注</span></div>
+          <div><strong data-count="20">0</strong><span>安全领域</span></div>
+          <div><strong data-count="175">0</strong><span>原始工作簿</span></div>
+          <div><strong>ZH / EN</strong><span>主要语种</span></div>
         </div>
       </div>
-      <aside class="hero-dashboard" aria-label="语料库数据摘要">
-        <div class="dashboard-head"><span>DATASET / V3</span><span class="status">研究性候选数据</span></div>
-        <div class="big-number">2,854<small>条候选标注</small></div>
-        <div class="metric-grid">
-          <div><strong>20</strong><span>安全领域</span></div>
-          <div><strong>175</strong><span>原始工作簿</span></div>
-          <div><strong>02</strong><span>主要语种</span></div>
-          <div><strong>V3</strong><span>当前版本</span></div>
-        </div>
-        <div class="signal-chart" aria-hidden="true">
-          <i style="--h:28%"></i><i style="--h:45%"></i><i style="--h:37%"></i><i style="--h:71%"></i><i style="--h:48%"></i><i style="--h:84%"></i><i style="--h:57%"></i><i style="--h:94%"></i><i style="--h:63%"></i><i style="--h:76%"></i><i style="--h:52%"></i><i style="--h:88%"></i>
-        </div>
-        <p class="dashboard-note">※ 全部命中均为 P0 候选敏感项，证据等级 C，需经专家复核后使用。</p>
-      </aside>
+      <div class="constellation-wrap reveal" aria-label="20 个国家安全领域星图">
+        <div class="constellation-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="constellation-core"><b>20</b><span>重点领域</span></div>
+        <div class="constellation" id="constellation"></div>
+        <p>点击星点，直达对应领域语料</p>
+      </div>
+      <a class="scroll-cue" href="#corpus"><span></span>探索数据</a>
     </section>
 
-    <section class="corpus-section" id="corpus">
-      <div class="section-heading">
-        <div><p class="section-index">01 / CORPUS ATLAS</p><h2>20 领域语料地图</h2></div>
-        <p>数字代表 V3 标注中的候选记录数，用于快速理解语料分布，不代表领域风险高低。</p>
+    <section class="corpus-section section-shell" id="corpus">
+      <div class="section-heading reveal">
+        <div><p class="section-index">01 · CORPUS EXPLORER</p><h2>语料检索台</h2></div>
+        <p>这里展示你收集并标注的真实语料。可按领域、语种、风险级别与关键词筛选，点击记录查看完整上下文。</p>
       </div>
-      <div class="explorer-toolbar">
-        <label class="search-box">
-          <span aria-hidden="true">⌕</span>
-          <input id="domain-search" type="search" placeholder="搜索领域，如“网络”“生态”“人工智能”…" autocomplete="off">
-        </label>
-        <div class="filter-group" role="group" aria-label="语料类型筛选">
-          <button class="filter active" type="button" data-filter="all">全部</button>
-          <button class="filter" type="button" data-filter="dual">中英双语</button>
-          <button class="filter" type="button" data-filter="emerging">新兴领域</button>
+      <div class="data-notice reveal"><span class="pulse"></span><b>研究性候选数据</b><p>全部记录为 P0 候选敏感项，证据等级 C，需专家复核；数量不代表领域风险程度。</p><button type="button" data-open-note>阅读数据说明</button></div>
+      <div class="explorer-layout">
+        <aside class="filter-panel reveal" aria-label="语料筛选">
+          <div class="filter-title"><span>FILTER ARRAY</span><button id="reset-filters" type="button">重置</button></div>
+          <label><span>全文检索</span><div class="search-field"><i>⌕</i><input id="record-search" type="search" placeholder="输入词语、标签或来源…" autocomplete="off"></div></label>
+          <label><span>国家安全领域</span><select id="domain-filter"><option value="">全部 20 个领域</option></select></label>
+          <label><span>源语言</span><select id="language-filter"><option value="">全部语种</option><option value="zh/">中文</option><option value="en/">English</option></select></label>
+          <label><span>风险级别</span><select id="risk-filter"><option value="">全部级别</option><option value="R2">R2</option><option value="R3">R3</option></select></label>
+          <div class="filter-summary"><span>当前结果</span><strong id="result-count">—</strong><small>/ 2,854 条</small></div>
+          <a id="domain-download" class="mini-download" href="downloads/国家安全20领域语料_V3_JSONL.zip" download><span>↓</span><div><b>下载当前数据</b><small id="download-label">完整 JSONL 数据包</small></div></a>
+        </aside>
+        <div class="results-panel reveal">
+          <div class="results-head"><div><span class="status-light"></span><b id="results-title">全部语料</b></div><span id="load-state">正在读取数据…</span></div>
+          <div class="record-list" id="record-list" aria-live="polite"></div>
+          <div class="empty-results" id="empty-results" hidden><i>✶</i><h3>没有找到匹配语料</h3><p>试试减少关键词，或重置筛选条件。</p></div>
+          <button class="load-more" id="load-more" type="button" hidden>继续加载 <span>↓</span></button>
         </div>
-      </div>
-      <div class="domain-grid" id="domain-grid" aria-live="polite"></div>
-      <p class="empty-state" id="empty-state" hidden>没有找到匹配的领域，试试更换关键词。</p>
-    </section>
-
-    <section class="guide-section" id="guide">
-      <div class="section-heading light">
-        <div><p class="section-index">02 / START HERE</p><h2>给初学者的语料库入门</h2></div>
-        <p>语料库不只是“很多文本”。它是按明确规则采集、整理、标注，并能被检索与分析的真实语言样本集合。</p>
-      </div>
-      <div class="explain-grid">
-        <article class="definition-card">
-          <span class="label">ONE-MINUTE EXPLAINER</span>
-          <h3>把语料库想成一座<br>“可搜索的语言实验室”</h3>
-          <p>普通文档库告诉你“有什么文章”；语料库还能告诉你“某个表达在哪里出现、前后说了什么、被如何标注”。研究者因此可以从真实使用中发现语言模式。</p>
-          <dl>
-            <div><dt>语料</dt><dd>一条真实使用过的语言材料</dd></div>
-            <div><dt>标注</dt><dd>给文本加上可分析的标签与说明</dd></div>
-            <div><dt>语境</dt><dd>理解一句话不可缺少的前因后果</dd></div>
-          </dl>
-        </article>
-        <div class="pipeline" aria-label="语料库建设流程">
-          <article><b>01</b><div><h3>采集</h3><p>从政府、媒体与学术平台获取中英文真实文本。</p></div></article>
-          <article><b>02</b><div><h3>清洗</h3><p>去除重复、无效内容，保留来源、时间与上下文。</p></div></article>
-          <article><b>03</b><div><h3>标注</h3><p>依据手册识别候选风险表达，记录标签、触发条件与证据。</p></div></article>
-          <article><b>04</b><div><h3>复核</h3><p>人工结合语境判断误报、边界案例与真正风险。</p></div></article>
-          <article><b>05</b><div><h3>应用</h3><p>支持话语研究、跨文化沟通、RAG 检索与应急系统。</p></div></article>
-        </div>
-      </div>
-      <div class="twenty-explainer">
-        <div><p class="section-index">WHY TWENTY?</p><h3>20 个重点领域，是一张相互连接的安全网络</h3></div>
-        <p>这些领域涵盖政治、经济、社会、生态与新兴技术等层面。一个真实事件往往横跨多个领域：例如数据泄露既关系数据安全，也可能传导到网络、金融与社会安全。因此，语料分类是分析入口，不是彼此割裂的盒子。</p>
       </div>
     </section>
 
-    <section class="research-section" id="research">
-      <div class="section-heading">
-        <div><p class="section-index">03 / RESEARCH MAP</p><h2>学术地图</h2></div>
-        <p>从应急语言服务的理论、组织与实践成果入手。下列条目均链接至院校、学术期刊或项目官方页面。</p>
+    <section class="downloads-section section-shell" id="downloads">
+      <div class="section-heading reveal">
+        <div><p class="section-index">02 · OPEN DATA</p><h2>数据下载中心</h2></div>
+        <p>使用 UTF-8 编码的 JSONL 格式，既可用文本工具逐行阅读，也方便 Python、RAG 工程与数据库导入。</p>
       </div>
-      <div class="research-layout">
-        <div class="scholar-column">
-          <h3 class="minor-title">相关学者 <span>PEOPLE</span></h3>
-          <a class="scholar-card featured" href="https://www.blcu.edu.cn/info/3472/23813.htm" target="_blank" rel="noopener"><span class="avatar">李</span><div><small>北京语言大学 · 教授</small><h4>李宇明</h4><p>国家应急语言服务团专家委员会主任，关注语言规划、国家语言能力与应急语言服务。</p></div><b>↗</b></a>
-          <a class="scholar-card" href="https://chinayjyyfw.blcu.edu.cn/zxgk/zzjg/zjwyh.htm" target="_blank" rel="noopener"><span class="avatar">赵</span><div><small>武汉大学 · 教授</small><h4>赵世举</h4><p>国家应急语言服务团专家委员会副主任，参与“战疫语言服务团”等应急语言实践。</p></div><b>↗</b></a>
-          <a class="scholar-card" href="https://journal.bisu.edu.cn/article/2020/1003-6539/1003-6539-42-1-21.shtml" target="_blank" rel="noopener"><span class="avatar">王</span><div><small>北京语言大学 · 教授</small><h4>王立非</h4><p>研究方向涵盖应用语言学、语言服务，对应急语言服务概念与体制机制建设进行系统论述。</p></div><b>↗</b></a>
-          <div class="placeholder-card"><span>+</span><div><h4>待补充学者</h4><p>预留头像、机构、研究方向与主页链接位置。</p></div></div>
-        </div>
-        <div class="paper-column">
-          <h3 class="minor-title">入门文献 <span>READING LIST</span></h3>
-          <ol class="paper-list">
-            <li><a href="https://journal.bisu.edu.cn/article/2020/1003-6539/1003-6539-42-1-21.shtml" target="_blank" rel="noopener"><span>2020 · 《北京第二外国语学院学报》</span><h4>应急语言服务的概念、研究现状与机制体制建设</h4><p>王立非、任杰、孙疆卫、蒙永业 · DOI：10.12002/j.bisu.261</p><b>↗</b></a></li>
-            <li><a href="https://ric.blcu.edu.cn/info/1157/2141.htm" target="_blank" rel="noopener"><span>2020 · 《天津外国语大学学报》</span><h4>应急语言能力建设刍论</h4><p>李宇明、饶高琦 · 四维度、十七项目标体系与能力分析模型</p><b>↗</b></a></li>
-            <li><a href="https://sllr.blcu.edu.cn/info/1131/10681.htm" target="_blank" rel="noopener"><span>2020 · 《语言战略研究》</span><h4>“战疫语言服务团”的实践与思考</h4><p>李宇明、赵世举、赫琳 · 应急语言产品与组织实践</p><b>↗</b></a></li>
-            <li><a href="https://chinayjyyfw.blcu.edu.cn/info/1227/1147.htm" target="_blank" rel="noopener"><span>专题研究 · 应急话语</span><h4>国家安全与公共卫生安全应急话语构建</h4><p>李战子、刘博怡 · 从语料库与大数据视角构建分析维度</p><b>↗</b></a></li>
-          </ol>
-          <div class="add-slot"><span>+</span><p><b>文献预留位</b><br>可继续添加你的论文、读书笔记或主题书目。</p></div>
-        </div>
+      <div class="download-hero reveal tilt-card">
+        <div class="package-orbit" aria-hidden="true"><i></i><i></i><b>JSONL</b></div>
+        <div class="package-copy"><span>COMPLETE DATASET · V3</span><h3>国家安全 20 领域语料包</h3><p>包含 20 个 JSONL 文件、数据卡与字段结构说明。解压后可按领域独立使用。</p><ul><li>2,854 条候选标注</li><li>20 个领域文件</li><li>849.5 KB ZIP</li></ul></div>
+        <a class="download-button" href="downloads/国家安全20领域语料_V3_JSONL.zip" download><span>下载完整数据包</span><small>国家安全20领域语料_V3_JSONL.zip</small><b>↓</b></a>
       </div>
-      <div class="project-strip">
-        <a href="https://chinayjyyfw.blcu.edu.cn/" target="_blank" rel="noopener"><small>ORGANIZATION</small><strong>国家应急语言服务团</strong><span>↗</span></a>
-        <a href="https://chinayjyyfw.blcu.edu.cn/info/1203/1302.htm" target="_blank" rel="noopener"><small>REFERENCE</small><strong>《突发事件应急术语实用手册》</strong><span>↗</span></a>
-        <a href="https://www.osns.gov.cn/gjaq/rsztgjaqg.htm" target="_blank" rel="noopener"><small>PUBLIC EDUCATION</small><strong>总体国家安全观专题学习</strong><span>↗</span></a>
+      <div class="download-subhead reveal"><h3>按领域下载</h3><p>需要某一个研究子集时，可直接下载对应 JSONL 文件。</p></div>
+      <div class="domain-download-grid reveal" id="domain-download-grid"></div>
+      <div class="data-use-grid reveal">
+        <article><span>01</span><div><h3>先看数据卡</h3><p>了解数据边界、误报状况、权利声明和建议用途。</p><a href="downloads/DATASET_CARD.md" target="_blank">查看数据卡 ↗</a></div></article>
+        <article><span>02</span><div><h3>再读字段说明</h3><p>根据记录编号、语境、标签、风险和证据字段设计分析。</p><a href="downloads/schema.json" target="_blank">查看数据结构 ↗</a></div></article>
+        <article><span>03</span><div><h3>最后人工复核</h3><p>对误报、边界语境与原始来源进行复核，再用于实证研究。</p><button type="button" data-open-note>阅读完整说明 ↗</button></div></article>
       </div>
     </section>
 
-    <section class="projects-section" id="projects">
-      <div class="section-heading light">
-        <div><p class="section-index">04 / PROJECT OUTPUT</p><h2>从语料到可用的应急系统</h2></div>
-        <p>“语安智引”把多语种火灾应急表达模板、共情话术和禁忌规则组织为可检索的知识底座，通过 RAG 生成可溯源的逃生建议。</p>
+    <section class="guide-section section-shell" id="guide">
+      <div class="section-heading reveal">
+        <div><p class="section-index">03 · START HERE</p><h2>从一条文本到语料库</h2></div>
+        <p>语料库是按明确规则采集、整理、标注并能被检索分析的真实语言样本集合。关键价值是保留语境与可溯源性。</p>
       </div>
-      <div class="product-grid">
-        <div class="product-story">
-          <span class="product-badge">FEATURED PROJECT · 2026</span><h3><em>语安</em>智引</h3><p class="product-en">Fire Escape AI Assistant</p>
-          <p>支持中、英、日、韩四种语言的火灾逃生智能问答原型。系统对用户问题进行语种识别与三库检索，再组织成有行动指向、有共情表达且避开沟通禁忌的回答。</p>
-          <div class="product-stats"><div><b>67</b><span>表达模板</span></div><div><b>88</b><span>共情话术</span></div><div><b>36</b><span>禁忌规则</span></div><div><b>4</b><span>支持语种</span></div></div>
-          <div class="flow-line"><span>用户提问</span><i>→</i><span>三库检索</span><i>→</i><span>风险校验</span><i>→</i><span>多语生成</span></div>
-          <div class="download-row"><a href="assets/public-summary.json" download>下载公开版数据摘要</a><a href="PROJECT_PUBLISHING_GUIDE.md" download>查看项目发布说明</a></div>
+      <div class="guide-intro reveal">
+        <div class="guide-question"><span>ONE MINUTE</span><h3>语料库和“一堆文档”有什么不同？</h3></div>
+        <p>文档库告诉你“有哪些文章”；语料库还能告诉你某个表达出现在哪里、前后说了什么、面向谁、被如何标注。这使得语言模式能被计算、比较和解释。</p>
+      </div>
+      <div class="pipeline reveal">
+        <article><b>01</b><i></i><div><span>COLLECT</span><h3>采集</h3><p>从政府、媒体与学术平台获取中英文真实文本。</p></div></article>
+        <article><b>02</b><i></i><div><span>CLEAN</span><h3>清洗</h3><p>去除重复与无效内容，保留来源、时间和完整语境。</p></div></article>
+        <article><b>03</b><i></i><div><span>ANNOTATE</span><h3>标注</h3><p>依据手册记录标签、风险等级、触发条件与证据。</p></div></article>
+        <article><b>04</b><i></i><div><span>REVIEW</span><h3>复核</h3><p>结合上下文区分有效候选、边界案例与误报。</p></div></article>
+        <article><b>05</b><div><span>APPLY</span><h3>应用</h3><p>用于话语研究、跨文化沟通、RAG 检索与应急系统。</p></div></article>
+      </div>
+      <div class="domain-primer reveal"><div><p class="section-index">WHY 20 DOMAINS?</p><h3>20 个领域是彼此传导的安全网络</h3></div><p>数据泄露可以同时影响数据、网络、金融和社会安全。因此，20 个领域是用于观察问题的入口，不是彼此割裂的盒子。在真实研究中，应关注风险如何在不同领域与语种之间流动。</p></div>
+    </section>
+
+    <section class="method-section section-shell" id="method">
+      <div class="section-heading reveal">
+        <div><p class="section-index">04 · RESEARCH METHOD</p><h2>从语料编码到信息生态解释</h2></div>
+        <p>这一板块回答“如何用这批语料做论文”。扎根理论用于从语料中逐步生成概念，信息生态理论用于解释这些概念在主体、环境与传播关系中如何运作。</p>
+      </div>
+      <div class="method-chain reveal">
+        <article><span>QUESTION</span><b>① 研究问题</b><p>禁忌表达如何在跨语言的国家安全叙事中形成与传播？</p></article>
+        <i>→</i><article><span>DATA</span><b>② 经验语料</b><p>以 20 个领域文本、语境、来源和候选标签为分析材料。</p></article>
+        <i>→</i><article><span>CODING</span><b>③ 扎根编码</b><p>通过开放编码、主轴编码与选择编码建立范畴。</p></article>
+        <i>→</i><article><span>INTERPRET</span><b>④ 生态解释</b><p>考察信息人、信息、技术与环境之间的相互作用。</p></article>
+      </div>
+      <div class="method-model reveal">
+        <div class="model-visual" aria-label="信息生态分析模型">
+          <div class="model-ring ring-one"><span>信息环境</span></div><div class="model-ring ring-two"><span>信息技术</span></div><div class="model-ring ring-three"><span>信息主体</span></div><div class="model-core">语言<br>风险</div>
         </div>
-        <div class="demo-panel">
-          <div class="demo-head"><div><span class="live-dot"></span> 公开版交互演示</div><small>STATIC DEMO</small></div>
+        <div class="model-copy"><span class="label">ANALYTICAL BRIDGE</span><h3>两种理论在研究中各自做什么？</h3><dl><div><dt>扎根理论</dt><dd>提供从原始语料到概念、范畴和核心命题的程序，避免一开始就用既有结论套数据。</dd></div><div><dt>信息生态理论</dt><dd>将生成的范畴放回信息主体、内容、媒介技术与环境的关系中，解释风险的形成与流动。</dd></div><div><dt>最终产出</dt><dd>形成一个由语料支撑、可继续用新案例修正的多语种禁忌语言信息生态模型。</dd></div></dl></div>
+      </div>
+    </section>
+
+    <section class="academic-section section-shell" id="academic">
+      <div class="section-heading reveal"><div><p class="section-index">05 · ACADEMIC MAP</p><h2>学者、文献与相关项目</h2></div><p>先读概念与体制机制，再读能力建设与实践案例，最后进入应急话语和语料库的专题研究。</p></div>
+      <div class="academic-grid reveal">
+        <div class="people-panel"><div class="panel-title"><h3>相关学者</h3><span>PEOPLE</span></div>
+          <a href="https://www.blcu.edu.cn/info/3472/23813.htm" target="_blank" rel="noopener"><span class="person-mark">李</span><div><small>北京语言大学 · 教授</small><h4>李宇明</h4><p>语言规划、国家语言能力与应急语言服务。</p></div><b>↗</b></a>
+          <a href="https://chinayjyyfw.blcu.edu.cn/zxgk/zzjg/zjwyh.htm" target="_blank" rel="noopener"><span class="person-mark">赵</span><div><small>武汉大学 · 教授</small><h4>赵世举</h4><p>社会语言学、语言战略与应急语言实践。</p></div><b>↗</b></a>
+          <a href="https://journal.bisu.edu.cn/article/2020/1003-6539/1003-6539-42-1-21.shtml" target="_blank" rel="noopener"><span class="person-mark">王</span><div><small>北京语言大学 · 教授</small><h4>王立非</h4><p>应用语言学、语言服务与应急语言机制体制。</p></div><b>↗</b></a>
+          <div class="reserved-slot"><span>+</span><p><b>学者资料预留位</b><br>可继续添加机构、研究方向与个人主页。</p></div>
+        </div>
+        <div class="reading-panel"><div class="panel-title"><h3>建议阅读顺序</h3><span>READING PATH</span></div>
+          <ol><li><a href="https://journal.bisu.edu.cn/article/2020/1003-6539/1003-6539-42-1-21.shtml" target="_blank" rel="noopener"><span>01 · 概念与制度</span><h4>应急语言服务的概念、研究现状与机制体制建设</h4><p>王立非、任杰、孙疆卫、蒙永业 · 2020</p><b>↗</b></a></li>
+          <li><a href="https://ric.blcu.edu.cn/info/1157/2141.htm" target="_blank" rel="noopener"><span>02 · 能力模型</span><h4>应急语言能力建设刍论</h4><p>李宇明、饶高琦 · 2020</p><b>↗</b></a></li>
+          <li><a href="https://sllr.blcu.edu.cn/info/1131/10681.htm" target="_blank" rel="noopener"><span>03 · 组织实践</span><h4>“战疫语言服务团”的实践与思考</h4><p>李宇明、赵世举、赫琳 · 2020</p><b>↗</b></a></li>
+          <li><a href="https://chinayjyyfw.blcu.edu.cn/info/1227/1147.htm" target="_blank" rel="noopener"><span>04 · 专题应用</span><h4>国家安全与公共卫生安全应急话语构建</h4><p>李战子、刘博怡</p><b>↗</b></a></li></ol>
+        </div>
+      </div>
+      <div class="resource-links reveal"><a href="https://chinayjyyfw.blcu.edu.cn/" target="_blank" rel="noopener"><small>ORGANIZATION</small><strong>国家应急语言服务团</strong><span>↗</span></a><a href="https://chinayjyyfw.blcu.edu.cn/info/1203/1302.htm" target="_blank" rel="noopener"><small>REFERENCE</small><strong>《突发事件应急术语实用手册》</strong><span>↗</span></a><a href="https://www.osns.gov.cn/gjaq/rsztgjaqg.htm" target="_blank" rel="noopener"><small>PUBLIC EDUCATION</small><strong>总体国家安全观专题</strong><span>↗</span></a></div>
+    </section>
+
+    <section class="project-section section-shell" id="project">
+      <div class="section-heading reveal"><div><p class="section-index">06 · APPLICATION</p><h2>语料如何进入应急系统</h2></div><p>“语安智引”是这批研究中的一个应用案例：把多语种表达模板、共情话术与禁忌规则组织为 RAG 知识底座。</p></div>
+      <div class="application-grid">
+        <div class="application-copy reveal"><span class="project-label">FEATURED PROJECT · 2026</span><h3><em>语安</em>智引</h3><p class="project-en">FIRE ESCAPE AI ASSISTANT</p><p>支持中、英、日、韩四种语言的火灾逃生智能问答原型。系统先识别场景与语种，再检索三类语料，生成有行动指向、有共情表达并避开沟通禁忌的回答。</p>
+          <div class="project-metrics"><div><b>67</b><span>表达模板</span></div><div><b>88</b><span>共情话术</span></div><div><b>36</b><span>禁忌规则</span></div><div><b>4</b><span>支持语种</span></div></div>
+          <div class="rag-flow"><span>用户提问</span><i>→</i><span>三库检索</span><i>→</i><span>风险校验</span><i>→</i><span>多语生成</span></div>
+        </div>
+        <div class="demo-panel reveal tilt-card">
+          <div class="demo-head"><div><span class="status-light"></span> 公开版交互演示</div><small>STATIC DEMO</small></div>
           <div class="language-tabs" role="tablist" aria-label="回答语言"><button class="lang active" data-lang="zh" role="tab" aria-selected="true">中文</button><button class="lang" data-lang="en" role="tab" aria-selected="false">English</button><button class="lang" data-lang="ja" role="tab" aria-selected="false">日本語</button><button class="lang" data-lang="ko" role="tab" aria-selected="false">한국어</button></div>
-          <p class="demo-prompt">选择一个场景：</p>
-          <div class="scenario-list"><button class="scenario active" data-scenario="elevator">① 火灾时能坐电梯吗？</button><button class="scenario" data-scenario="smoke">② 楼道有烟怎么办？</button><button class="scenario" data-scenario="trapped">③ 被困室内怎么办？</button></div>
-          <div class="answer-box" id="demo-answer" aria-live="polite"></div>
-          <p class="demo-note">演示内容仅用于介绍系统逻辑；真实火情中请优先遵循现场消防救援人员指令。</p>
+          <p class="demo-prompt">选择场景：</p><div class="scenario-list"><button class="scenario active" data-scenario="elevator">火灾时能坐电梯吗？</button><button class="scenario" data-scenario="smoke">楼道有烟怎么办？</button><button class="scenario" data-scenario="trapped">被困室内怎么办？</button></div>
+          <div class="answer-box" id="demo-answer" aria-live="polite"></div><p class="demo-note">演示内容仅用于介绍系统逻辑；真实火情中请优先遵循消防救援人员指令。</p>
         </div>
-      </div>
-      <div class="research-framework">
-        <div><p class="section-index">RESEARCH FRAME</p><h3>信息生态与扎根理论的交汇点</h3></div>
-        <ol><li><b>01 语言主体</b><span>政府、媒体、平台、专家与公众如何参与信息生产。</span></li><li><b>02 信息环境</b><span>语种、媒介、场景与事件阶段如何改变表达意义。</span></li><li><b>03 风险流动</b><span>禁忌表达、情绪与叙事如何在跨语言传播中被放大或修正。</span></li><li><b>04 理论生成</b><span>通过开放编码、主轴编码与选择编码，从语料中生成可检验的概念关系。</span></li></ol>
-      </div>
-    </section>
-
-    <section class="methods-section" id="methods">
-      <div><p class="section-index">05 / DATA NOTE</p><h2>如何理解这批数据</h2></div>
-      <div class="notice-card"><strong>这是研究性候选集，不是终审禁忌词典。</strong><p>V3 中 2,854 条命中均为 P0 候选敏感项、证据等级 C、置信度低。抽样结果显示，数据中仍包含误报和边界语境。任何对外发布、策略制定或模型评测，都应先经语言与领域专家复核。</p></div>
-      <div class="source-list"><h3>官方与学术来源</h3>
-        <a href="https://www.mod.gov.cn/gfbw/fgwx/bps/16385614.html" target="_blank" rel="noopener"><span>01</span><div><b>《新时代的中国国家安全》白皮书</b><small>国务院新闻办公室 · 2025</small></div><i>↗</i></a>
-        <a href="https://www.osns.gov.cn/gjaq/rsztgjaqg.htm" target="_blank" rel="noopener"><span>02</span><div><b>认识总体国家安全观</b><small>中央人民政府驻香港特别行政区维护国家安全公署</small></div><i>↗</i></a>
-        <a href="https://chinayjyyfw.blcu.edu.cn/" target="_blank" rel="noopener"><span>03</span><div><b>国家应急语言服务团</b><small>组织、成果与学术资讯</small></div><i>↗</i></a>
       </div>
     </section>
   </main>
 
-  <footer><div><strong>语安智库</strong><span>多语种语料、应急语言与国家安全的知识交流平台</span></div><div><a href="#corpus">语料地图</a><a href="#research">学术地图</a><a href="#projects">项目成果</a><a href="#methods">数据说明</a></div><p>数据版本：V3 · 2026-08-14<br>本站为学术研究与科普演示项目。</p></footer>
+  <footer>
+    <div class="footer-brand"><span class="brand-orbit"><i></i><b>语</b></span><div><strong>语安智库</strong><p>多语种语料、应急语言与国家安全知识交流平台</p></div></div>
+    <div class="footer-nav"><a href="#corpus">语料检索</a><a href="#downloads">数据下载</a><a href="#method">研究方法</a><a href="#academic">学术资源</a></div>
+    <p>V3 · 2026-08-14<br>研究性候选数据，使用前请复核。</p>
+  </footer>
+
+  <dialog class="record-dialog" id="record-dialog"><button class="dialog-close" type="button" aria-label="关闭">×</button><div id="record-detail"></div></dialog>
+  <dialog class="note-dialog" id="note-dialog"><button class="dialog-close" type="button" aria-label="关闭">×</button><span class="dialog-kicker">DATA USE NOTICE</span><h2>下载与使用前请阅读</h2><p>本数据集为研究性标注候选集。全部记录均为 P0 候选敏感项、证据等级 C、置信度低，不能直接视为终审禁忌、事实判断或官方立场。</p><ul><li>使用时保留完整语境与来源链接。</li><li>对误报、边界语境与原始来源进行人工复核。</li><li>原始文本版权归各发布者，再使用时请遵守来源条款。</li><li>正式成果应标注数据版本、访问日期与项目来源。</li></ul><a class="button primary" href="downloads/DATASET_CARD.md" target="_blank">查看完整数据卡 ↗</a></dialog>
+
   <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>
