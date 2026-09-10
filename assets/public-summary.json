@@ -1,0 +1,11 @@
+{
+  "project": "语安智库",
+  "version": "V3",
+  "updated": "2026-08-14",
+  "notice": "研究性 P0 候选数据，证据等级 C，置信度低，需专家复核。",
+  "totals": {"domains": 20, "workbooks": 175, "candidate_annotations": 2854},
+  "fire_assistant": {"templates": 67, "empathy_phrases": 88, "taboo_rules": 36, "languages": 4},
+  "domains": [
+    {"name":"数据安全","count":660},{"name":"军事安全","count":611},{"name":"人工智能安全","count":334},{"name":"资源安全","count":203},{"name":"文化安全","count":190},{"name":"网络安全","count":184},{"name":"社会安全","count":177},{"name":"科技安全","count":116},{"name":"太空安全","count":84},{"name":"经济安全","count":82},{"name":"深海安全","count":54},{"name":"生态安全","count":40},{"name":"核安全","count":38},{"name":"金融安全","count":29},{"name":"粮食安全","count":16},{"name":"国土安全","count":12},{"name":"政治安全","count":10},{"name":"海外利益安全","count":6},{"name":"生物安全","count":5},{"name":"极地安全","count":3}
+  ]
+}

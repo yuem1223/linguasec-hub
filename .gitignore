@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+*.exe
+*.db
+.env
+.env.*
+*.xlsx
+*.xls
+*.jsonl
